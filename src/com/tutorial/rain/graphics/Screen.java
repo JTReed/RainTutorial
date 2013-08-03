@@ -12,9 +12,11 @@ public class Screen
 {
 	public final int MAP_SIZE = 64;
 
-	private int width, height;
+	public int width, height;
 	public int pixels[];
 	public int[] tiles = new int[MAP_SIZE * MAP_SIZE]; // 64x64 tiles
+
+	public int xOffset, yOffset;
 
 	private Random random = new Random();
 
@@ -41,38 +43,32 @@ public class Screen
 		}
 	}
 
-	public void render(int xOffset, int yOffset)
-	{
-		for (int y = 0; y < height; y++) {
-			int yp = y + yOffset;
-			if (yp < 0 || yp >= height) {
-				continue;
-			}
+	
 
-			for (int x = 0; x < width; x++) {
-				int xp = x + xOffset;
-				if (xp < 0 || xp >= width) {
-					continue;
+	public void renderTile(int xp, int yp, Tile tile)
+	{
+		xp -= xOffset;
+		yp -= yOffset;
+		
+		for (int y = 0; y < tile.sprite.SIZE; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < tile.sprite.SIZE; x++) {
+				int xa = x + xp;
+				if (xa < -tile.sprite.SIZE || xa >= width|| ya < 0 || ya >= height) {
+					break;
 				}
-				pixels[(xp) + (yp) * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.SIZE];
+				if(xa < 0) {
+					xa = 0;
+				}
+
+				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 			}
 		}
 	}
 
-	public void renderTile(int xp, int yp, Tile tile)
+	public void setOffset(int xOffset, int yOffset)
 	{
-		for (int y = 0; y < tile.sprite.SIZE; y++) {
-			int ya = y + yp;
-			
-			for (int x = 0; y < tile.sprite.SIZE; x++) {
-				int xa = x + xp;
-				if(xa < 0 || xa >= width || ya < 0 || ya >= height) {
-					break;
-				}
-				
-				pixels[xa + ya + width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
-				
-			}
-		}
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 	}
 }

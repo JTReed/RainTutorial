@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 
 import com.tutorial.rain.graphics.Screen;
 import com.tutorial.rain.input.Keyboard;
+import com.tutorial.rain.level.Level;
+import com.tutorial.rain.level.RandomLevel;
 
 /* Main Game does exactly what it sounds like - 
  * Displays the game and runs the game
@@ -33,6 +35,8 @@ public class MainGame extends Canvas implements Runnable
 	private Screen screen;
 	public static String title = "Rain";
 	
+	private Level level;
+	
 	int x = 0, y = 0;
 	
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -46,6 +50,7 @@ public class MainGame extends Canvas implements Runnable
 
 		screen = new Screen(width, height);
 		frame = new JFrame();
+		level = new RandomLevel(64, 64);
 		
 		key = new Keyboard();
 		addKeyListener(key);	// do this after instantiating key
@@ -107,10 +112,10 @@ public class MainGame extends Canvas implements Runnable
 	{
 		// handle movement of map
 		key.update();
-		if(key.up) { y++; }
-		if(key.down) { y--; }
-		if(key.left) { x++; }
-		if(key.right) {x--; }
+		if(key.up) { y--; }
+		if(key.down) { y++; }
+		if(key.left) { x--; }
+		if(key.right) {x++; }
 	}
 
 	public void render()
@@ -122,7 +127,7 @@ public class MainGame extends Canvas implements Runnable
 		}
 		
 		screen.clear();
-		screen.render(x, y);
+		level.render(x, y, screen);
 		
 		for(int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

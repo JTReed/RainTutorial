@@ -9,6 +9,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.tutorial.rain.entity.mob.Player;
 import com.tutorial.rain.graphics.Screen;
 import com.tutorial.rain.input.Keyboard;
 import com.tutorial.rain.level.Level;
@@ -34,10 +35,8 @@ public class MainGame extends Canvas implements Runnable
 	private boolean running = false;
 	private Screen screen;
 	public static String title = "Rain";
-	
 	private Level level;
-	
-	int x = 0, y = 0;
+	private Player player;
 	
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -50,9 +49,10 @@ public class MainGame extends Canvas implements Runnable
 
 		screen = new Screen(width, height);
 		frame = new JFrame();
-		level = new RandomLevel(64, 64);
-		
+		level = new RandomLevel(64, 64);		
 		key = new Keyboard();
+		player = new Player(key);
+		
 		addKeyListener(key);	// do this after instantiating key
 	}
 
@@ -110,12 +110,8 @@ public class MainGame extends Canvas implements Runnable
 
 	public void update()
 	{
-		// handle movement of map
 		key.update();
-		if(key.up) { y--; }
-		if(key.down) { y++; }
-		if(key.left) { x--; }
-		if(key.right) {x++; }
+		player.update();
 	}
 
 	public void render()
@@ -127,7 +123,7 @@ public class MainGame extends Canvas implements Runnable
 		}
 		
 		screen.clear();
-		level.render(x, y, screen);
+		level.render(player.x, player.y, screen);
 		
 		for(int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

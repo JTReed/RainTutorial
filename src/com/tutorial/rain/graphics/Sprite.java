@@ -16,6 +16,18 @@ public class Sprite
 	public static Sprite playerLeft =  new Sprite(32, 1, 5, SpriteSheet.tiles);
 	public static Sprite playerRight =  new Sprite(32, 1, 6, SpriteSheet.tiles);
 	
+	public static Sprite playerDown1 = new Sprite(32, 0, 4, SpriteSheet.tiles);
+	public static Sprite playerDown2 = new Sprite(32, 2, 4, SpriteSheet.tiles);
+	
+	public static Sprite playerUp1 = new Sprite(32, 0, 7, SpriteSheet.tiles);
+	public static Sprite playerUp2 = new Sprite(32, 2, 7, SpriteSheet.tiles);
+	
+	public static Sprite playerLeft1 = new Sprite(32, 0, 5, SpriteSheet.tiles);
+	public static Sprite playerLeft2 = new Sprite(32, 2, 5, SpriteSheet.tiles);
+	
+	public static Sprite playerRight1 = new Sprite(32, 0, 6, SpriteSheet.tiles);
+	public static Sprite playerRight2 = new Sprite(32, 2, 6, SpriteSheet.tiles);
+	
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet)
 	{

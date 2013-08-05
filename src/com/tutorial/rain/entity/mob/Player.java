@@ -1,6 +1,7 @@
 package com.tutorial.rain.entity.mob;
 
 import com.tutorial.rain.graphics.Screen;
+import com.tutorial.rain.graphics.Sprite;
 import com.tutorial.rain.input.Keyboard;
 
 public class Player extends Mob
@@ -10,6 +11,7 @@ public class Player extends Mob
 	public Player(Keyboard input)
 	{
 		this.input = input;
+		sprite = Sprite.playerDown;
 	}
 	
 	public Player(int x, int y, Keyboard input)
@@ -17,6 +19,7 @@ public class Player extends Mob
 		this.x = x;
 		this.y = y;
 		this.input = input;
+		sprite = Sprite.playerDown;
 	}
 	
 	public void update()
@@ -34,13 +37,19 @@ public class Player extends Mob
 	
 	public void render(Screen screen)
 	{
-		int xx = x - 16;
-		int yy = y - 16;
+		if(dir == 0) { // N
+			screen.renderPlayer(x - 16, y - 16, sprite.playerUp);
+		} 
+		if(dir == 1) { // E
+			screen.renderPlayer(x - 16, y - 16, sprite.playerRight);
+		}
+		if(dir == 2) { // S
+			screen.renderPlayer(x - 16, y - 16, sprite.playerDown);
+		}
+		if(dir == 3) { // W
+			screen.renderPlayer(x - 16, y - 16, sprite.playerLeft);
+		}
 		
-		screen.renderPlayer(xx, yy, sprite.player0);
-		screen.renderPlayer(xx + 16, yy, sprite.player1);
-		screen.renderPlayer(xx, yy + 16, sprite.player2);
-		screen.renderPlayer(xx + 16, yy + 16, sprite.player3);
 	}
 		
 }

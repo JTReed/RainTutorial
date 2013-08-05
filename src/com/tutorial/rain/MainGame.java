@@ -122,8 +122,12 @@ public class MainGame extends Canvas implements Runnable
 			return;
 		}
 		
+		int xScroll = player.x - screen.width / 2;
+		int yScroll = player.y - screen.height / 2;
+		
 		screen.clear();
-		level.render(player.x, player.y, screen);
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
 		
 		for(int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

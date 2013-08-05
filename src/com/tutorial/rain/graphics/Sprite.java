@@ -10,6 +10,11 @@ public class Sprite
 	
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);	// x offset, y offset
 	public static Sprite voidSprite = new Sprite(16, 0x1b87e0);
+	
+	public static Sprite player0 = new Sprite(16, 2, 8, SpriteSheet.tiles);
+	public static Sprite player1 = new Sprite(16, 3, 8, SpriteSheet.tiles);
+	public static Sprite player2 = new Sprite(16, 2, 9, SpriteSheet.tiles);
+	public static Sprite player3 = new Sprite(16, 3, 9, SpriteSheet.tiles);
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet)
 	{

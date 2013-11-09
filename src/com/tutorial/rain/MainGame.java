@@ -14,6 +14,7 @@ import com.tutorial.rain.graphics.Screen;
 import com.tutorial.rain.input.Keyboard;
 import com.tutorial.rain.level.Level;
 import com.tutorial.rain.level.RandomLevel;
+import com.tutorial.rain.level.SpawnLevel;
 
 /* Main Game does exactly what it sounds like - 
  * Displays the game and runs the game
@@ -49,7 +50,7 @@ public class MainGame extends Canvas implements Runnable
 
 		screen = new Screen(width, height);
 		frame = new JFrame();
-		level = new RandomLevel(64, 64);		
+		level = new SpawnLevel("/textures/spawnLevel.png");		
 		key = new Keyboard();
 		player = new Player(key);
 		
